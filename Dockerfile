@@ -7,7 +7,7 @@ COPY src /app/src
 RUN mvn package -DskipTests
 
 # Run stage - using official Eclipse Temurin JDK
-FROM eclipse-temurin:17-jre-jammy
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17
 WORKDIR /app
 COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
