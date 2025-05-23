@@ -1,13 +1,13 @@
-# Build stage
-FROM maven:3.8.6-openjdk-17 AS build
+# Build stage - using current official Maven image
+FROM maven:3.8.7-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY src /app/src
 RUN mvn package -DskipTests
 
-# Run stage
-FROM openjdk:17-jdk-slim
+# Run stage - using official Eclipse Temurin JDK
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
