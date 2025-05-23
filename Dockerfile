@@ -1,5 +1,5 @@
 # Build stage - using current official Maven image
-FROM maven:3.8.7-eclipse-temurin-17 AS build
+FROM public.ecr.aws/docker/library/maven:3.8.7-eclipse-temurin-17 AS builder
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
